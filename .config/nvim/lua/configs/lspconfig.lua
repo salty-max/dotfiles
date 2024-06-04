@@ -16,6 +16,13 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig.sourcekit.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  cmd = {"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"},
+}
+
 lspconfig.gopls.setup {
   on_attach = on_attach,
   on_init = on_init,

@@ -52,6 +52,7 @@ return {
         "json",
         "yaml",
         "toml",
+        "swift",
       },
     },
   },

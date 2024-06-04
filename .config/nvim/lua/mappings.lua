@@ -22,3 +22,15 @@ end, { desc = "Debug go test" })
 map({ "n" }, "<leader>dgl", function ()
   require("dap-go").debug_last()
 end, { desc = "Debug last go test" })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- enable omnifunc completion
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- buffer local mappings
+    map({ "n" }, "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+    map({ "n" }, "K", vim.lsp.buf.hover, { buffer = ev.buf })
+  end
+})
