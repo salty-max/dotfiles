@@ -93,3 +93,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+
+# Swift
+export TOOLCHAIN_PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain
+export PATH=$TOOLCHAIN_PATH/usr/bin/sourcekit-lsp:$PATH

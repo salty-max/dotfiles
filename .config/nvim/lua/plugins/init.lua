@@ -102,4 +102,9 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
 }

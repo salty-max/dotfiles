@@ -23,6 +23,11 @@ map({ "n" }, "<leader>dgl", function ()
   require("dap-go").debug_last()
 end, { desc = "Debug last go test" })
 
+map({ "n" }, "<C-h>", "<cmd> TmuxNavigateLeft<CR>", { desc = "Window left" })
+map({ "n" }, "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Window right" })
+map({ "n" }, "<C-j>", "<cmd> TmuxNavigateDown<CR>", { desc = "Window down" })
+map({ "n" }, "<C-k>", "<cmd> TmuxNavigateUp<CR>", { desc = "Window up" })
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
