@@ -18,6 +18,18 @@ $ brew install git
 $ brew install stow
 ```
 
+### Neovim
+
+```
+$ brew install nvim
+```
+
+### Tmux
+
+```
+$ brew install tmux
+```
+
 ## Installation
 
 First, check out the dotfiles repo in your `$HOME` directory using git
@@ -32,3 +44,20 @@ then use GNU stow to create symlinks
 ```
 $ stow .
 ```
+
+## Tmux Plugins Manager
+
+In order to use the tmux config, you need to clone the plugin manager
+
+```
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+```
+
+Then run tmux
+
+```
+$ tmux
+```
+
+and press `C-Space` + `I` to install plugins
