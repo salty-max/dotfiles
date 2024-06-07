@@ -97,3 +97,6 @@ export PATH=$GOPATH/bin:$PATH
 # Swift
 export TOOLCHAIN_PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain
 export PATH=$TOOLCHAIN_PATH/usr/bin/sourcekit-lsp:$PATH
+
+# Rust
+export PATH=$HOME/.cargo/bin:$PATH
