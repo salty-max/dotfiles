@@ -5,11 +5,11 @@ return {
     local db = require("dashboard")
     local pokemon = require("pokemon")
     pokemon.setup({
-      number = "0104",
+      number = "0039",
       size = "auto",
     })
     db.setup({
-      theme = 'doom',
+      theme = "doom",
       config = {
         header = pokemon.header(),
         center = {
@@ -37,9 +37,8 @@ return {
             action = "quit",
           },
         },
-
       },
     })
   end,
-  dependencies = { "nvim-tree/nvim-web-devicons", "ColaMint/pokemon.nvim" }
+  dependencies = { "nvim-tree/nvim-web-devicons", "ColaMint/pokemon.nvim" },
 }

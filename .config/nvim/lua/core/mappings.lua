@@ -29,16 +29,16 @@ map("n", "<leader>tl", ":TestLast<CR>", { desc = "Test last" })
 map("n", "<leader>tv", ":TestVisit<CR>", { desc = "Test visit" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-		map("n", "K", vim.lsp.buf.hover, { desc = "Hover information" })
-		map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-		map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-		map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
-		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+    map("n", "K", vim.lsp.buf.hover, { desc = "Hover information" })
+    map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+    map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+    map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
+    map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
 
-		map("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format buffer" })
-	end,
+    map("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format buffer" })
+  end,
 })

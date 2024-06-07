@@ -30,6 +30,14 @@ $ brew install nvim
 $ brew install tmux
 ```
 
+## Optional
+
+### Alacritty
+
+```
+$ brew install alacritty
+```
+
 ## Installation
 
 First, check out the dotfiles repo in your `$HOME` directory using git
