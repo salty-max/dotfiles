@@ -3,13 +3,13 @@
   "modules-left": [
     "cpu",
     "temperature",
-    "memory",
-    "tray"
+    "memory"
   ],
   "modules-center": [
     "hyprland/workspaces"
   ],
   "modules-right": [
+    "tray",
     "network",
     "pulseaudio",
     "battery",
