@@ -15,7 +15,7 @@
     "usageBarEnabled": true,
     "showDuration": true,
     "showSessionName": true,
-    "customLine": "Chuck Norris doesn't git push — the repo pulls out of respect."
+    "customLine": ""
   },
   "gitStatus": {
     "enabled": true,
