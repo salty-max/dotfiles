@@ -1,1 +1,17 @@
+# Theme (Catppuccin Mocha, consistent with Ghostty/Neovim)
 --theme="Catppuccin Mocha"
+
+# Show line numbers and git changes, no header noise
+--style="numbers,changes"
+
+# Don't page for short output
+--paging=auto
+
+# Italic support (Ghostty handles it fine)
+--italic-text=always
+
+# Syntax mappings for common dotfiles
+--map-syntax "*.conf:INI"
+--map-syntax ".gitignore:Git Ignore"
+--map-syntax ".envrc:Bash"
+--map-syntax ".env*:Bash"
