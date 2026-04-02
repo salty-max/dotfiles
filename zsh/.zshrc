@@ -64,6 +64,12 @@ alias ps='procs'
 alias top='btop'
 
 # ====================
+# Dotfiles management
+# ====================
+alias dotinstall='bash "$HOME/.dotfiles/install.sh"'
+alias dotupdate='bash "$HOME/.dotfiles/update.sh"'
+
+# ====================
 # Git aliases (supplements oh-my-zsh git plugin)
 # ====================
 alias gpfl='git push --force-with-lease'
