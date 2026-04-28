@@ -1,0 +1,63 @@
+- [feedback_no_coauthor.md](feedback_no_coauthor.md) - Do not add Co-Authored-By lines in commits
+- [feedback_pnpm_version.md](feedback_pnpm_version.md) - Specify pnpm version in CI workflow, not package.json
+- [feedback_branch_from_main.md](feedback_branch_from_main.md) - Feature branches for PRs must be based on main, not WIP branches
+- [feedback_separate_commits.md](feedback_separate_commits.md) - Don't amend unrelated changes; create separate commits
+- [feedback_amend_fixes.md](feedback_amend_fixes.md) - Amend review fixes into the original commit that introduced the issue
+- [feedback_create_issues_before_implementing.md](feedback_create_issues_before_implementing.md) - Create sub-issues before starting implementation of large features
+- [feedback_composition_over_props.md](feedback_composition_over_props.md) - Prefer compound sub-components over content props (e.g. Step.Title not title="...")
+- [feedback_form_context_over_props.md](feedback_form_context_over_props.md) - Field resolves errors via useFormContext, not errors prop
+- [feedback_compound_exports.md](feedback_compound_exports.md) - UI components use compound pattern (Field.Label, Button.Text) not barrel re-exports
+- [reference_lucide_icons.md](reference_lucide_icons.md) - Project uses react-native-solar-icons (migrated from lucide)
+- [reference_solar_icons_ellipse_bug.md](reference_solar_icons_ellipse_bug.md) - Some solar icons (UsersGroupRounded, UsersGroupTwoRounded) crash at runtime due to missing Ellipse import
+- [reference_solar_scooter_hardcoded_color.md](reference_solar_scooter_hardcoded_color.md) - solar-icons bold/Scooter hardcodes #1C274C; use BicyclingRound when you need a tinted bike icon
+- [feedback_no_fix_commits.md](feedback_no_fix_commits.md) - No standalone fix commits; amend into the original commit
+- [feedback_liquid_glass.md](feedback_liquid_glass.md) - Glass effect = iOS 26 Liquid Glass, not expo-blur
+- [feedback_no_close_sheet_navigation.md](feedback_no_close_sheet_navigation.md) - Dismiss sheet then push for screen nav, don't overcomplicate
+- [feedback_activity_card_separate.md](feedback_activity_card_separate.md) - Activity card stays standalone, not a HomeCard variant
+- [feedback_color_objects_not_colorset.md](feedback_color_objects_not_colorset.md) - Theme color type is Color (not ColorSet/ColorGroup)
+- [feedback_no_agents.md](feedback_no_agents.md) - Do direct edits, never delegate code changes to agents
+- [feedback_mock_no_i18n.md](feedback_mock_no_i18n.md) - Mock screens don't need i18n, only auth has final design
+- [feedback_no_fixup_spam.md](feedback_no_fixup_spam.md) - Squash fixups locally before pushing, don't spam PR with fixup commits
+- [reference_dotfiles_stow.md](reference_dotfiles_stow.md) - Dotfiles in ~/.dotfiles managed with stow, commit there not ~/.config
+- [feedback_claude_review_comment.md](feedback_claude_review_comment.md) - Request Claude reviews via @claude PR comment, not CLI
+- [feedback_wait_before_pushing.md](feedback_wait_before_pushing.md) - Wait for explicit user validation before `git push`; commit locally first (overrides older auto-push rule during active iteration)
+- [feedback_no_closes_in_commit.md](feedback_no_closes_in_commit.md) - Put Closes #N in PR description only, not in commit messages
+- [feedback_no_issue_refs_in_commits.md](feedback_no_issue_refs_in_commits.md) - No `Part of #N`/`Closes #N`/any issue or PR reference in commit messages; PR description only
+- [feedback_no_skip_hooks.md](feedback_no_skip_hooks.md) - Never use --no-verify, always let hooks run and fix lint before committing
+- [feedback_no_useref.md](feedback_no_useref.md) - useRef is deprecated in React 19, use useState with ref callback instead
+- [feedback_hooks_not_in_types.md](feedback_hooks_not_in_types.md) - Don't put hooks in types.ts files, hooks belong in hooks files
+- [feedback_use_e2e_script.md](feedback_use_e2e_script.md) - Use ./scripts/e2e.sh for E2E builds, not manual expo commands
+- [feedback_sheets_scrollable.md](feedback_sheets_scrollable.md) - Always wrap full-height sheet content in SheetScrollView
+- [feedback_no_stubs.md](feedback_no_stubs.md) - Wire all interactive elements, don't leave onPress no-ops
+- [feedback_reuse_existing_inputs.md](feedback_reuse_existing_inputs.md) - Use PhoneField/DatePicker instead of plain text for editable data
+- [feedback_global_before_local.md](feedback_global_before_local.md) - Fix at the shared component level first, not per-instance
+- [feedback_commitlint_scope_new_dirs.md](feedback_commitlint_scope_new_dirs.md) - Add commitlint scope when creating new directories
+- [feedback_clean_debug_before_commit.md](feedback_clean_debug_before_commit.md) - Remove console.log and debug code before committing
+- [feedback_compound_by_default.md](feedback_compound_by_default.md) - All shared components must use compound pattern (Object.assign)
+- [feedback_dont_request_review_unless_asked.md](feedback_dont_request_review_unless_asked.md) - Don't request reviews proactively, wait for existing ones
+- [feedback_split_compound_files.md](feedback_split_compound_files.md) - Compound components must be split into one file per sub-component
+- [feedback_hydration_safety.md](feedback_hydration_safety.md) - Hydration first + try/catch + 3s splash timeout fallback
+- [feedback_error_reporting.md](feedback_error_reporting.md) - Every catch reports to Sentry; toast for user-facing errors
+- [feedback_no_compound_self_import.md](feedback_no_compound_self_import.md) - Sub-components import siblings directly, never via ./index
+- [feedback_typecheck_script.md](feedback_typecheck_script.md) - Add `pnpm typecheck` script if missing instead of running `tsc --noEmit` ad hoc
+- [feedback_no_knip_ignore_hack.md](feedback_no_knip_ignore_hack.md) - Don't ignore unused files in knip, wire them properly
+- [feedback_no_dash_placeholder.md](feedback_no_dash_placeholder.md) - Never use "—" as placeholder, leave blank or hide
+- [feedback_screenshot_pencil_first.md](feedback_screenshot_pencil_first.md) - Always fetch Pencil screenshots (not just text specs) before implementing UI
+- [feedback_maestro_sequential.md](feedback_maestro_sequential.md) - Run maestro flows one-by-one and bail on first failure, not the whole folder
+- [feedback_rebuild_only_when_needed.md](feedback_rebuild_only_when_needed.md) - Rebuild iOS only when native code changed, Metro covers JS edits
+- [feedback_fix_not_defer_bugs.md](feedback_fix_not_defer_bugs.md) - Fix bugs immediately when a test exposes them; don't remove the test or ship broken UX
+- [feedback_propose_before_removing.md](feedback_propose_before_removing.md) - Confirm which UI items to drop before removing content; don't decide unilaterally
+- [reference_github_closes_auto_link.md](reference_github_closes_auto_link.md) - GitHub PR "Closes #N" auto-link needs a blank line after the keyword; `gh` re-save alone doesn't retrigger parsing
+- [reference_pencil_onboarding_main_frames.md](reference_pencil_onboarding_main_frames.md) - Node IDs for the 15 main-onboarding Pencil screens (Pencil MCP timeouts on tree queries, screenshots-by-ID work)
+- [reference_cocoapods_utf8_locale.md](reference_cocoapods_utf8_locale.md) - `pod install` / `expo prebuild -p ios` needs `LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8` or CocoaPods dies with an encoding error
+- [feedback_fixup_only_for_review.md](feedback_fixup_only_for_review.md) - `--fixup=` is only for review feedback; direct user asks get regular commits, even on an open PR
+- [feedback_no_native_edits.md](feedback_no_native_edits.md) - Never hand-edit ios/android generated files; fix via app.json or JS/TS root cause
+- [feedback_no_french_in_code.md](feedback_no_french_in_code.md) - Code identifiers, file names, and comments must be English; French only allowed in user-facing strings (locale files)
+- [feedback_user_input_not_localizable.md](feedback_user_input_not_localizable.md) - User-entered data (names of people, places, vehicles) stays in the user's language; don't pipe it through i18n
+- [feedback_use_existing_section.md](feedback_use_existing_section.md) - Use the shared `<Section>` + `<Separator />` instead of rolling bespoke `styles.section` Views
+- [feedback_diff_before_blaming.md](feedback_diff_before_blaming.md) - `git show` the commit the user blames before reverting; structural changes in later commits are the usual culprit
+- [feedback_no_pencil_in_jsdoc.md](feedback_no_pencil_in_jsdoc.md) - Never reference Pencil frames or node IDs in JSDoc — they belong in PR body / commit message
+- [feedback_no_button_radius_override.md](feedback_no_button_radius_override.md) - Don't override the Button's borderRadius per call site — every button shares the same shape
+- [feedback_e2e_skip_onboardings.md](feedback_e2e_skip_onboardings.md) - E2E flows pre-mark every onboarding complete; onboardings are deep-linked in their own flows
+- [feedback_claude_review_monitor_timeout.md](feedback_claude_review_monitor_timeout.md) - Watch @claude review with ~240000ms (4 min), not the Monitor tool ceiling
+- [feedback_no_proactive_rebuild.md](feedback_no_proactive_rebuild.md) - Don't trigger iOS rebuilds proactively; wait for the user to ask

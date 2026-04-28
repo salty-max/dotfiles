@@ -1,0 +1,4 @@
+# Project-scoped Claude Code memory lives in dotfiles only as a backup;
+# the install script copies it into ~/.claude/projects/ post-stow so
+# session writes don't dirty the dotfiles repo.
+\.claude/projects

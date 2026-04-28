@@ -1,0 +1,1 @@
+- [Confirm before acting](feedback_confirm_before_acting.md) — list planned actions for review before creating issues/PRs/external changes

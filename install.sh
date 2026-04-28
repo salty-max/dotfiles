@@ -271,6 +271,60 @@ done
 section_done
 
 # ====================
+# Dotfiles (GNU Stow)
+# ====================
+# Run BEFORE Oh My Zsh, gh auth, and yazi pkg add so the symlinks are
+# in place when those steps would otherwise create real files at the
+# same paths (~/.zshrc, ~/.gitconfig, ~/.config/yazi/package.toml).
+section "🔗" "Dotfiles (GNU Stow)"
+cd "$DOTFILES_DIR"
+
+PACKAGES=(zsh git bat yazi nvim claude)
+if [[ "$INSTALL_CASKS" == true ]]; then
+  PACKAGES+=(ghostty)
+fi
+
+for pkg in "${PACKAGES[@]}"; do
+  if [[ -d "$pkg" ]]; then
+    # `--no-folding` for claude: keep ~/.claude/ as a real dir so
+    # Claude Code's runtime state (cache, file-history, debug, etc.)
+    # doesn't land inside the dotfiles repo via a folded symlink.
+    # Other packages can fold safely — they either don't write at
+    # runtime or the rider explicitly tracks those writes.
+    stow_args=(--target="$HOME" --restow)
+    if [[ "$pkg" == "claude" ]]; then
+      stow_args+=(--no-folding)
+    fi
+    if stow "${stow_args[@]}" "$pkg" 2>> "$LOG_FILE"; then
+      ok "$pkg"
+    else
+      warn "$pkg — stow reported conflicts, check log"
+    fi
+  else
+    warn "$pkg not found, skipping"
+  fi
+done
+
+# Verify that the critical symlinks landed — catches the "stow returned
+# 0 but didn't actually link anything" failure mode we hit on a stale
+# install where real files at the target blocked the link silently.
+critical_links=(
+  "$HOME/.zshrc"
+  "$HOME/.gitconfig"
+  "$HOME/.claude/settings.json"
+)
+for link in "${critical_links[@]}"; do
+  if [[ -L "$link" ]]; then
+    : # symlink in place
+  elif [[ -e "$link" ]]; then
+    warn "$link exists but is NOT a symlink — stow couldn't replace it"
+  else
+    warn "$link missing — stow may have failed for that package"
+  fi
+done
+section_done
+
+# ====================
 # Fonts
 # ====================
 FONT_CASKS=(
@@ -374,7 +428,10 @@ section "🐚" "Oh My Zsh + Plugins"
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
   ok "Oh My Zsh"
 else
-  run "Installing Oh My Zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  # `--keep-zshrc` preserves the symlinked ~/.zshrc that stow already
+  # placed earlier — without it the OMZ installer overwrites the
+  # symlink target with its template.
+  run "Installing Oh My Zsh" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -445,6 +502,25 @@ fi
 section_done
 
 # ====================
+# Sentry CLI
+# ====================
+section "🛡" "Sentry CLI"
+if command -v sentry &>/dev/null; then
+  ok "Already installed ($(sentry --version 2>/dev/null))"
+else
+  run "Installing Sentry CLI" bash -c 'curl -fsSL https://cli.sentry.dev/install | bash'
+fi
+if sentry auth status &>/dev/null 2>&1; then
+  ok "Already authenticated"
+else
+  echo ""
+  printf "  ${BLUE}Launching Sentry login...${RESET}\n"
+  echo ""
+  sentry auth login || warn "Sentry auth failed, run 'sentry auth login' manually"
+fi
+section_done
+
+# ====================
 # Yazi Catppuccin flavor
 # ====================
 section "📂" "Yazi"
@@ -453,24 +529,23 @@ run "Catppuccin Mocha flavor" bash -c 'ya pkg add yazi-rs/flavors:catppuccin-moc
 section_done
 
 # ====================
-# Dotfiles (GNU Stow)
+# Claude project memory (seed from dotfiles backup)
 # ====================
-section "🔗" "Dotfiles (GNU Stow)"
-cd "$DOTFILES_DIR"
-
-PACKAGES=(zsh git bat yazi nvim claude)
-if [[ "$INSTALL_CASKS" == true ]]; then
-  PACKAGES+=(ghostty)
+# Per-project memory files (~/.claude/projects/<id>/memory/*.md, MEMORY.md)
+# are excluded from stow via claude/.stow-local-ignore so live session
+# writes don't dirty the dotfiles repo. Seed them once here on a fresh
+# install — subsequent edits stay local until re-backed-up manually.
+section "🧠" "Claude Project Memory"
+CLAUDE_MEMORY_SRC="$DOTFILES_DIR/claude/.claude/projects"
+CLAUDE_MEMORY_DST="$HOME/.claude/projects"
+if [[ -d "$CLAUDE_MEMORY_SRC" ]]; then
+  mkdir -p "$CLAUDE_MEMORY_DST"
+  cp -Rn "$CLAUDE_MEMORY_SRC/." "$CLAUDE_MEMORY_DST/"
+  count=$(find "$CLAUDE_MEMORY_SRC" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+  ok "Seeded $count memory file(s) into $CLAUDE_MEMORY_DST"
+else
+  skip "No backup found at $CLAUDE_MEMORY_SRC"
 fi
-
-for pkg in "${PACKAGES[@]}"; do
-  if [[ -d "$pkg" ]]; then
-    stow "$pkg" --target="$HOME" --restow 2>> "$LOG_FILE" || true
-    ok "$pkg"
-  else
-    warn "$pkg not found, skipping"
-  fi
-done
 section_done
 
 # ====================

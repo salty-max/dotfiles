@@ -1,0 +1,2 @@
+- [Curl for downloads](feedback_curl_downloads.md) — prefer curl over git clone for grabbing individual files
+- [No Co-Authored-By](feedback_no_coauthored.md) — never add Co-Authored-By Claude line to commits
