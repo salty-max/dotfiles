@@ -549,6 +549,32 @@ fi
 section_done
 
 # ====================
+# claude-mem plugin observations (restore from backup tarball)
+# ====================
+# claude-mem stores observation history + an SQLite db in ~/.claude-mem/.
+# The chroma vector store is rebuilt from the db on first query, so
+# only the db + observer-sessions + settings are tarred. Skip the
+# extract on a re-run if the data dir is already populated.
+section "🧠" "claude-mem snapshot"
+CMEM_BACKUP="$DOTFILES_DIR/claude/claude-mem-backup.tar.gz"
+CMEM_DIR="$HOME/.claude-mem"
+if [[ -f "$CMEM_BACKUP" ]]; then
+  if [[ -f "$CMEM_DIR/claude-mem.db" ]]; then
+    skip "$CMEM_DIR/claude-mem.db already exists — leaving the live db alone"
+  else
+    mkdir -p "$CMEM_DIR"
+    if tar -xzf "$CMEM_BACKUP" -C "$HOME" 2>> "$LOG_FILE"; then
+      ok "Restored claude-mem snapshot into $CMEM_DIR"
+    else
+      warn "claude-mem extract failed, check log"
+    fi
+  fi
+else
+  skip "No claude-mem backup at $CMEM_BACKUP"
+fi
+section_done
+
+# ====================
 # Summary
 # ====================
 echo ""

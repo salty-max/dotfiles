@@ -2,3 +2,7 @@
 # the install script copies it into ~/.claude/projects/ post-stow so
 # session writes don't dirty the dotfiles repo.
 \.claude/projects
+
+# claude-mem plugin observation snapshot — extracted by install.sh
+# into ~/.claude-mem/, never symlinked.
+claude-mem-backup\.tar\.gz
