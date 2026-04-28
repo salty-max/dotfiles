@@ -10,7 +10,8 @@
   },
   "enabledPlugins": {
     "claude-hud@claude-hud": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-hud": {
@@ -25,5 +26,7 @@
         "repo": "thedotmack/claude-mem"
       }
     }
-  }
+  },
+  "skipAutoPermissionPrompt": true,
+  "theme": "dark-daltonized"
 }
